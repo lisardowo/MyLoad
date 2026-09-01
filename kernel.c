@@ -3,7 +3,7 @@
 
 void printToKern(char *Message,char color );
 
-void main(){
+void _start(){
   char color = 0x0F; // white in hex
   char Message[] = "Writing to memory !";
   printToKern(Message, color);

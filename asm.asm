@@ -1,5 +1,5 @@
 [bits 16] ; all bootloader starts as 16 real bytes
-[org 0x7c00] ; the address of the kernel in memory
+[org 0x7c00] ; the address of the bootloader in memory
 
 ; 16 bits stck configuration
 
@@ -54,7 +54,7 @@ CODE_SEG equ gdt_code - gdt_start
 DATA_SEG equ gdt_data - gdt_start
 
 switchTo32Bit:
-  cli   ; disable keyboard interrupt
+  cli   ; disable hardware interrupt
   lgdt [gdt_descriptor] ; load GDT descriptor
   ;
   mov eax, cr0
@@ -69,13 +69,15 @@ init32Bit:
   ; Update segment registers using ax
   mov ds, ax
   mov ss, ax
-  mov cs, ax
+ ;TODO mov cs, ax
   mov es, ax
   mov fs, ax
   mov gs, ax
 
   mov ebp, 0x90000 ; setup stack
   mov esp, ebp
+
+  jmp 0x1000 ; jump to kernel
 
 times 510-($-$$) db 0 ; fills the nedeed bytes so the next instruction lands in 510/11 bytes
 dw 0xAA55 ; Magic number
