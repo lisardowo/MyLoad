@@ -9,6 +9,7 @@ void main(){
   printToKern(Message, color);
 
   while(1){
+    
     //kernel should never stop
   }
 
@@ -24,9 +25,9 @@ void printToKern(char *Message, char color){
       /*VideoMemory layout alternates 1 byte for whats to be printed and 1 byte dictates the color
        
        P.E: 0xB8000 -> starts the VideoMemory domain, Byte to be displayed
-       0xB001 -> Color of the byte
-       0xB002 -> To be displayed
-       oxB003 -> Color of the byte
+       0xB8001 -> Color of the byte
+       0xB8002 -> To be displayed
+       oxB8003 -> Color of the byte
        
        
        * */

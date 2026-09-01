@@ -77,3 +77,5 @@ init32Bit:
   mov ebp, 0x90000 ; setup stack
   mov esp, ebp
 
+times 510-($-$$) db 0 ; fills the nedeed bytes so the next instruction lands in 510/11 bytes
+dw 0xAA55 ; Magic number
