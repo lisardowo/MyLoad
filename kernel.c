@@ -4,11 +4,11 @@
 void printToKern(char *Message,char color );
 
 void main(){
-  char color = 0xFFFFFF // white in hex
-  char Message[] = "Writing to memory !"
-  printToKern(Message, color)
+  char color = 0x0F; // white in hex
+  char Message[] = "Writing to memory !";
+  printToKern(Message, color);
 
-  whie(1){
+  while(1){
     //kernel should never stop
   }
 

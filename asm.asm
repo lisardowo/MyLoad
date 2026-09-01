@@ -64,7 +64,7 @@ switchTo32Bit:
   jmp CODE_SEG:init32Bit  ; far jump to clean CPU pipeline
 
 [bits 32]
-init32bit:
+init32Bit:
   mov ax, DATA_SEG  ; Load the new segment to ax register
   ; Update segment registers using ax
   mov ds, ax

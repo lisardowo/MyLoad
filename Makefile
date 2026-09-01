@@ -2,8 +2,8 @@ all: run
 os_image.bin: boot.bin kernel.bin
 	cat boot.bin kernel.bin > os_image.bin
 
-boot.bin: Asm
-	nasm -f bin Asm -o boot.bin
+boot.bin: asm.asm
+	nasm -f bin asm.asm -o boot.bin
 
 kernel.o: kernel.c
 	gcc -m32 -ffreestanding -fno-pie -c kernel.c -o kernel.o
