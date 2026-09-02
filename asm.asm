@@ -1,27 +1,30 @@
-[bits 16] ; all bootloader starts as 16 real bytes
+[bits 16] ; all bootloader starts as 16 real bytes so we request nasm to compile this code to 16 bits instructions
 [org 0x7c00] ; the address of the bootloader in memory
 
-; 16 bits stck configuration
+; 16 we clean the segments for the data descriptor table
 
 xor ax, ax
 mov ds, ax
 mov es, ax
 mov ss, ax
-mov sp, 0x7c00 ; Assigns the kernel to the bottom(start) of the pile 
+mov sp, 0x7c00 ; Set the stack pointer (start of the stack) to this address 
+
+; in x86 systems usually the stack grows downars
 
 ; reading from disk
 
 mov ah, 0x02 ; read mode
-mov al, 15 ;reading 15 sectors of the memory
+mov al, 15 ; reading 15 sectors of the memory
 mov cl, 2 ; starts reading from the 2nd sector (since the first is the bootloader itself)
 mov bx, 0x1000 ; direction where we are putting the loaded kernel
 int 0x13 ; Disk interrupt (BIOS)
 
+jmp switchTo32Bit
 ; Group descriptor table ;
 
-gdt_start:
+gdt_start: ; each entry of the table ocuppies 8 bytes blocks
 
-gdt_null: ; Intel architecture mandates to have an 8 byte block of zeros for security reasons
+gdt_null: ; Intel architecture mandates to have an sector of zeros for security reasons
   dd 0x0
   dd 0x0
 
