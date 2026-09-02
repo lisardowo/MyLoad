@@ -35,3 +35,19 @@ void printToKern(char *Message, char color){
   
 
 }
+
+char swapColors(int *i){
+  
+  char Colors[] = 
+
+  for(;;*i++){
+
+    if Colors[i + 1] == -1 { // Would this be better with null?
+      *i = 0;
+      return Colors[i]
+    }
+
+    return Colors[i + 1]
+
+  }
+}
