@@ -2,6 +2,7 @@
 #define VideoMemory (volatile char*)0xB8000
 
 void printToKern(char *Message,char color );
+char swapColors(int *j);
 
 void _start(){
   char color = 0x0F; // white in hex
@@ -18,10 +19,10 @@ void _start(){
 void printToKern(char *Message, char color){
   
   volatile char *currentAddress = VideoMemory; // Volatile to force the write to said addres
-
+  int j = 0;
   for(int i=0; Message[i] != '\0' ; i++){
       *currentAddress++ = Message[i];
-      *currentAddress++ = color;
+      *currentAddress++ = swapColors(&j);
       /*VideoMemory layout alternates 1 byte for whats to be printed and 1 byte dictates the color
        
        P.E: 0xB8000 -> starts the VideoMemory domain, Byte to be displayed
@@ -36,18 +37,18 @@ void printToKern(char *Message, char color){
 
 }
 
-char swapColors(int *i){
+char swapColors(int *j){
   
-  char Colors[] = 
+  char Colors[] = {0xFF, 0x57, 0x33, -1}; 
 
-  for(;;*i++){
+  for(;;*j++){
 
-    if Colors[i + 1] == -1 { // Would this be better with null?
-      *i = 0;
-      return Colors[i]
+    if (Colors[*j + 1] == -1) { // Would this be better with null?
+      *j = 0;
+      return Colors[*j];
     }
 
-    return Colors[i + 1]
+    return Colors[*j + 1];
 
   }
 }
