@@ -4,8 +4,8 @@ os_image.bin: boot.bin kernel.bin
 	cat boot.bin kernel.bin > os_image.bin
 	dd if=/dev/zero bs=512 count=15 >> os_image.bin
 
-boot.bin: asm.asm
-	nasm -f bin asm.asm -o boot.bin
+boot.bin: bootloader.asm
+	nasm -f bin bootloader.asm -o boot.bin
 
 kernel.o: kernel.c
 	gcc -m32 -ffreestanding -fno-pie -fno-stack-protector -mno-sse -mno-mmx -mno-sse2 -c kernel.c -o kernel.o
