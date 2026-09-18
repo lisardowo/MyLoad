@@ -18,7 +18,7 @@ mov al, 15     ; Number of sectors to read
 mov ch, 0      ; Cilinder 0 
 mov dh, 0      ; Head 0 
 mov cl, 2      ; Starts reading from the 2nd sector (first one is the bootloader itself)
-mov cl, 200
+
 call load_disk    ; Invoques the read function from disk.asm 
 
 ; 32 Bits protected mode
