@@ -10,7 +10,7 @@ gdt_null: ;
 
 gdt_code: ; This sector defines the region of memory the cpu can load instructions from
   
-  dw  0xFFFF ; in 32 bits architecture (the one we are curently using) both descriptors should be 8 bytes long
+  dw  0xFFFF, 0x0 ; in 32 bits architecture (the one we are curently using) both descriptors should be 8 bytes long
   db  0x0,  10011010b,  11001111b,  0x0
 
 gdt_data:
